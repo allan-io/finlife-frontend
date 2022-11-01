@@ -1,4 +1,3 @@
-// const { create } = require('../models/investmentModel')
 const Investment = require('../models/investmentModel')
 const mongoose = require('mongoose')
 
