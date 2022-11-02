@@ -1,5 +1,16 @@
 const Investment = require('../models/investmentModel')
 const mongoose = require('mongoose')
+const {totVal} = require('../helperFunctions')
+
+// const totVal = async (name, transactionTotal) => {
+//     const result = await Investment.find({
+//         name
+//     })
+
+//         const totalVal = result.reduce((partialSum, el) => partialSum + el.transactionTotal, 0) + transactionTotal
+//         return Math.round((transactionTotal / totalVal) * 1e6) / 1e6
+
+// }
 
 const getInvestments = async (req, res) => {
 
@@ -32,10 +43,41 @@ const getInvestment = async (req, res) => {
 }
 
 const createInvestment = async (req, res) => {
-    const { name, type, purchasePrice, purchaseValue, broker, defaultValue, ticker } = req.body
+
+
+    let { name,
+            type,
+            action,
+            ticker,
+            broker,
+            stockPrice,
+            transactionTotal,
+            sharesPurchased,
+            fraction,
+            isNegative,
+            divident
+         } = req.body
+
+         const newFraction = await totVal(name, transactionTotal)
+
+
 
     try {
-        const investment = await Investment.create({name, type, purchasePrice, broker, defaultValue, ticker, purchaseValue})
+
+
+        const investment = await Investment.create({
+            name,
+            type,
+            action,
+            ticker,
+            broker,
+            stockPrice,
+            transactionTotal,
+            sharesPurchased,
+            fraction:newFraction,
+            isNegative,
+            divident
+        })
         res.status(200).json(investment)
     } catch (error) {
         res.status(400).json({ error:error.message })

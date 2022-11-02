@@ -11,35 +11,45 @@ const investmentSchema = new Schema({
         type: String,
         required: true
     },
-    purchasePrice: {
-        type: Number,
-        required: true
-    },
-    // quantity: {
-    //     type: Number,
-    //     required: true,
-    // },
-    // totalValue: {
-    //     type: Number,
-    //     default: function() {
-    //         return Math.ceil((this.purchasePrice * this.quantity) * 100) / 100
-    //     }
-    // },
-    broker: {
-        type: String,
-        required: true
-    },
-    defaultValue: {
-        type: String,
+    action: {
+        type:String,
         required: true
     },
     ticker: {
         type: String,
         required: true
     },
-    purchaseValue: {
+    broker: {
+        type: String,
+        required: true
+    },
+    stockPrice: {
         type: Number,
         required: true
+    },
+    transactionTotal: {
+        type: Number,
+        required: true
+    },
+    sharesPurchased: {
+        type: Number,
+        required: true,
+        default: function() {
+            return (Math.round((this.transactionTotal / this.stockPrice) * 1e6) / 1e6)
+        }
+    },
+    fraction: {
+        type: Number,
+        default: 1
+    },
+    isNegative: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    dividents: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 
