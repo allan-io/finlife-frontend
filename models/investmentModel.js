@@ -13,7 +13,8 @@ const investmentSchema = new Schema({
     },
     action: {
         type:String,
-        required: true
+        required: true,
+        default: 'buy'
     },
     ticker: {
         type: String,
