@@ -1,4 +1,4 @@
-const Investment = require('./models/investmentModel')
+const Investment = require('../models/investmentModel')
 
 
 const totVal = async (name, transactionTotal) => {

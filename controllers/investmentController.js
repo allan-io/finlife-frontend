@@ -1,6 +1,6 @@
 const Investment = require('../models/investmentModel')
 const mongoose = require('mongoose')
-const {totVal} = require('../helperFunctions')
+const {totVal} = require('./helperFunctions')
 
 const getInvestments = async (req, res) => {
 
